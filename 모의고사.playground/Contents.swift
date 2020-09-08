@@ -37,3 +37,22 @@ let ex = [3,3,1,1,2,2,4,4,5,5]
 solution(ex)
 
 //dictionary를 이용한풀이
+func solution1(_ answers:[Int]) -> [Int] {
+    let student = (
+        a : [1,2,3,4,5],
+        b : [2,1,2,3,2,4,2,5],
+        c : [3,3,1,1,2,2,4,4,5,5]
+    )
+    
+    var result: [Int:Int] = [1:0, 2:0, 3:0]
+    
+    for (i, v) in answers.enumerated(){
+        if v == student.a[i % student.a.count] { result[1] = result[1]! + 1 }
+        if v == student.b[i % student.b.count] { result[2] = result[2]! + 1 }
+        if v == student.c[i % student.c.count] { result[3] = result[3]! + 1 }
+    }
+    
+    return result.sorted{ $0.key < $1.key }.filter{ $0.value == result.values.max() }.map{ $0.key }
+}
+
+solution1(ex)
